@@ -1,0 +1,21 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ractive-load tests</title>
+	<link rel="stylesheet" href="vendor/mocha/mocha.css" />
+</head>
+<body>
+	<div id="mocha"></div>
+	<script src="scripts/jquery-1.11.3.min.js"></script>
+	<script src="scripts/ractive.min.js"></script>
+	<script src="scripts/ractive-load.min.js"></script>
+	<script src="vendor/mocha/mocha.js"></script>
+	<script src="vendor/chai/chai.js"></script>
+	<script>mocha.setup('bdd')</script>
+	<script src="tests.js"></script>
+	<script>
+		mocha.checkLeaks();
+		mocha.run();
+	</script>
+</body>
+</html>
