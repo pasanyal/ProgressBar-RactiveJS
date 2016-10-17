@@ -66,7 +66,7 @@
                     }
 				});
 				
-				assert.equal( ractive.toHTML(), '<div class="row-pb"><div class="display-label">100%</div> <div class="progress-barB" style="width: 100%"></div></div> <select class="row-select"><option selected value="select" selected>Select Progress Bar</option> <option value="0">ProgressBar2</option></select> <button disabled class="btns">-25</button>');
+				assert.equal( ractive.toHTML(), '<div class="row-pb"><div class="display-label">100%</div> <div class="progress-barR" style="width: 100%"></div></div> <select class="row-select"><option selected value="select" selected>Select Progress Bar</option> <option value="0">ProgressBar2</option></select> <button disabled class="btns">-25</button>');
 			});
 			
 		});
