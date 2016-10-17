@@ -5,8 +5,9 @@ The packages used in the project:
 2. Webpack
 3. Babel
 4. Webpack-dev-server - Static web server
-5. less - For CSS minification
-6. mocha - For unit testing
+5. NPM build tool
+6. less - For CSS processing
+7. mocha - For unit testing
 
 Install node.js to run npm.
 
