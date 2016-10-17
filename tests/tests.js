@@ -5,7 +5,7 @@
 		assert = chai.assert;
 		load = Ractive.load;
 		
-		it( 'should load a progressive-bar component with green bar', function () {
+		it( 'Load two progress-bars of 0 width and 4 buttons', function () {
 			return load( '../app/views/progressbar.html' ).then( function ( Component ) {
 				var ractive = new Component({
 					data: {
@@ -23,7 +23,7 @@
 			});
 		});
 		
-		it( 'should load a progressive-bar component with red bar', function () {
+		it( 'Load ProgressBar1 of width:25% and one button', function () {
 			return load( '../app/views/progressbar.html' ).then( function ( Component ) {
 				var ractive = new Component({
 					data: {
@@ -38,9 +38,39 @@
 			});
 			
 		});
+        
+        it( 'Load ProgressBar1 of width:125% and one button', function () {
+			return load( '../app/views/progressbar.html' ).then( function ( Component ) {
+				var ractive = new Component({
+					data: {
+                        progressbars: [
+                            { name: 'ProgressBar1', value: 125 }
+                        ],
+                        intervals: [ -25 ]
+                    }
+				});
+				
+				assert.equal( ractive.toHTML(), '<div class="row-pb"><div class="display-label">125%</div> <div class="progress-barR" style="width: 100%"></div></div> <select class="row-select"><option selected value="select" selected>Select Progress Bar</option> <option value="0">ProgressBar1</option></select> <button disabled class="btns">-25</button>');
+			});
+			
+		});
+        
+        it( 'Load ProgressBar2 of width:100% and one button', function () {
+			return load( '../app/views/progressbar.html' ).then( function ( Component ) {
+				var ractive = new Component({
+					data: {
+                        progressbars: [
+                            { name: 'ProgressBar2', value: 100 }
+                        ],
+                        intervals: [ -25 ]
+                    }
+				});
+				
+				assert.equal( ractive.toHTML(), '<div class="row-pb"><div class="display-label">100%</div> <div class="progress-barB" style="width: 100%"></div></div> <select class="row-select"><option selected value="select" selected>Select Progress Bar</option> <option value="0">ProgressBar2</option></select> <button disabled class="btns">-25</button>');
+			});
+			
+		});
 		
 	});
 
 }());
-		
-		
