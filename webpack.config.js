@@ -1,7 +1,9 @@
+var webpack = require('webpack');
 module.exports = {  
     entry: './app/js/app.js',
+    devtool: 'source-map',
     output: {
-        filename: './dist/js/app-bundle.js'
+        filename: './dist/js/app-bundle.min.js'
     },
     module: {
         loaders: [
@@ -20,6 +22,9 @@ module.exports = {
         ]
     },
     node: {
-      fs: 'empty'
-    }
+        fs: 'empty'
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({minimize: true})
+    ]
 };
