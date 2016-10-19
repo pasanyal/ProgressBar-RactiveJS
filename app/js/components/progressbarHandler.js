@@ -10,17 +10,25 @@ var ProgressbarHandler = Ractive.extend({
         if(selectedBar == null) return;
         
         var keypath = 'progressbars[' + selectedBar + '].value';
-        if(this.get(keypath) < 0)
+        var keypath1 = 'progressbars[' + selectedBar + '].showvalue';
+        
+        if(this.get(keypath1) < 0) 
+        {
             this.set(keypath, 0);
-        this.add(keypath, val);
+            this.set(keypath1, 0);
+        }
+        var f = this.get(keypath1) + val;
+        this.set(keypath1, f);
+        this.animate(keypath, f);        
     },
 
     data: function () {
         return {
             selectedProgressBar: 'select',
             progressbars: [
-                { name: 'ProgressBar1', value: 0 },
-                { name: 'ProgressBar2', value: 0 }
+                { name: 'ProgressBar1', value: 0, showvalue: 0 },
+                { name: 'ProgressBar2', value: 0, showvalue: 0 },
+                { name: 'ProgressBar3', value: 0, showvalue: 0 }
             ],
             intervals: [ +25, +10, -10, -25 ]
         };

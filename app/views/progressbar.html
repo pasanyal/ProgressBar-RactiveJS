@@ -1,6 +1,6 @@
     {{#each progressbars}}
         <div class="row-pb">
-            <div class="display-label">{{value < 0 ? 0 : value}}%</div>
+            <div class="display-label">{{showvalue < 0 ? 0 : showvalue}}%</div>
             <div class="progress-bar{{value > 100 ? 'R' : 'B'}}" style="width: {{value > 100 ? 100 : ( value < 0 ? 0 : value )}}%"></div>
         </div>
     {{/each}}

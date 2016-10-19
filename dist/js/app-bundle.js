@@ -17043,7 +17043,7 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\t\n    <div>\n        <h3>Progressbar Width Handler</h3>\n    </div>\n\t<div style=\"margin-top: 15px;\">\n\t   <ProgressbarHandler />\n    </div>\t\n</div>\n"
+	module.exports = "<div class=\"container\">\t\n    <div>\n        <h3>Progressbar Width Handler</h3>\n    </div>\n\t<div class=\"row-1\">\n\t   <ProgressbarHandler />\n    </div>\t\n</div>\n"
 
 /***/ },
 /* 8 */
@@ -17074,14 +17074,21 @@
 	        if (selectedBar == null) return;
 
 	        var keypath = 'progressbars[' + selectedBar + '].value';
-	        if (this.get(keypath) < 0) this.set(keypath, 0);
-	        this.add(keypath, val);
+	        var keypath1 = 'progressbars[' + selectedBar + '].showvalue';
+
+	        if (this.get(keypath1) < 0) {
+	            this.set(keypath, 0);
+	            this.set(keypath1, 0);
+	        }
+	        var f = this.get(keypath1) + val;
+	        this.set(keypath1, f);
+	        this.animate(keypath, f);
 	    },
 
 	    data: function data() {
 	        return {
 	            selectedProgressBar: 'select',
-	            progressbars: [{ name: 'ProgressBar1', value: 0 }, { name: 'ProgressBar2', value: 0 }],
+	            progressbars: [{ name: 'ProgressBar1', value: 0, showvalue: 0 }, { name: 'ProgressBar2', value: 0, showvalue: 0 }, { name: 'ProgressBar3', value: 0, showvalue: 0 }],
 	            intervals: [+25, +10, -10, -25]
 	        };
 	    }
@@ -17093,7 +17100,7 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "    {{#each progressbars}}\r\n        <div class=\"row-pb\">\r\n            <div class=\"display-label\">{{value < 0 ? 0 : value}}%</div>\r\n            <div class=\"progress-bar{{value > 100 ? 'R' : 'B'}}\" style=\"width: {{value > 100 ? 100 : ( value < 0 ? 0 : value )}}%\"></div>\r\n        </div>\r\n    {{/each}}\r\n\r\n    <select value='{{selectedProgressBar}}' class=\"row-select\">\r\n        <option selected value='select'>Select Progress Bar</option>\r\n        {{#each progressbars :index}}\r\n            <option value='{{index}}'>{{name}}</option>\r\n        {{/each}}\r\n    </select>\r\n\r\n    {{#each intervals}}\r\n        <button disabled='{{selectedProgressBar == \"select\"}}' \r\n                on-click='@this.changeInterval(this)' class=\"btns\">\r\n            {{this > 0 ? '+' : ''}}{{this}}\r\n        </button>\r\n    {{/each}}"
+	module.exports = "    {{#each progressbars}}\r\n        <div class=\"row-pb\">\r\n            <div class=\"display-label\">{{showvalue < 0 ? 0 : showvalue}}%</div>\r\n            <div class=\"progress-bar{{value > 100 ? 'R' : 'B'}}\" style=\"width: {{value > 100 ? 100 : ( value < 0 ? 0 : value )}}%\"></div>\r\n        </div>\r\n    {{/each}}\r\n\r\n    <select value='{{selectedProgressBar}}' class=\"row-select\">\r\n        <option selected value='select'>Select Progress Bar</option>\r\n        {{#each progressbars :index}}\r\n            <option value='{{index}}'>{{name}}</option>\r\n        {{/each}}\r\n    </select>\r\n\r\n    {{#each intervals}}\r\n        <button disabled='{{selectedProgressBar == \"select\"}}' \r\n                on-click='@this.changeInterval(this)' class=\"btns\">\r\n            {{this > 0 ? '+' : ''}}{{this}}\r\n        </button>\r\n    {{/each}}"
 
 /***/ },
 /* 10 */
@@ -17130,7 +17137,7 @@
 
 
 	// module
-	exports.push([module.id, ".container {\n  margin: auto;\n  width: 40%;\n  right: 20%;\n  position: absolute;\n}\n.row-pb {\n  height: 20px;\n  width: 200px;\n  border: 1px solid #000000;\n  margin: 5px;\n  text-align: center;\n}\n.row-pb .progress-barB {\n  height: 100%;\n  background-color: #0061de;\n  position: relative;\n  top: -18.5px;\n}\n.row-pb .progress-barR {\n  height: 100%;\n  background-color: #ea1b3d;\n  position: relative;\n  top: -18.5px;\n}\n.row-pb .display-label {\n  position: relative;\n  z-index: 1001;\n}\n.row-select {\n  margin: 5px;\n}\n.btns {\n  margin: 5px;\n}\n@media only screen and (max-width: 34em) {\n  .btns {\n    width: 100%;\n  }\n}\n", ""]);
+	exports.push([module.id, "body {\n  background-color: #ffdead;\n}\n#app {\n  margin-top: 45px;\n}\n.container {\n  margin: auto;\n  width: 350px;\n  text-align: center;\n  background-color: #deb887;\n  padding: 20px;\n}\n.container .row-1 {\n  margin-top: 20px;\n}\n.row-pb {\n  height: 20px;\n  border: 1px solid #000000;\n  margin: 5px;\n}\n.row-pb .progress-barB {\n  height: 100%;\n  background-color: #0061de;\n  position: relative;\n  top: -18.5px;\n}\n.row-pb .progress-barR {\n  height: 100%;\n  background-color: #ea1b3d;\n  position: relative;\n  top: -18.5px;\n}\n.row-pb .display-label {\n  position: relative;\n  z-index: 1001;\n}\n.row-select {\n  margin: 5px;\n}\n.btns {\n  margin: 5px;\n}\n@media only screen and (max-width: 34em) {\n  .btns {\n    width: 100%;\n  }\n}\n", ""]);
 
 	// exports
 
