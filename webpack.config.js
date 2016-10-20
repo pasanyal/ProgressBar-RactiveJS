@@ -1,9 +1,16 @@
+/* Webpack configurations to bundle the application modules,
+the compiled and compressed js file is generated in /dist/js/app-bundle.min.js,
+css file is generated in /dist/css/styles.min.css
+*/
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {  
     entry: './app/js/app.js',
     devtool: 'source-map',
     output: {
-        filename: './dist/js/app-bundle.min.js'
+        path: './dist',
+        filename: '/js/app-bundle.js'
     },
     module: {
         loaders: [
@@ -16,15 +23,23 @@ module.exports = {
                 }
             },
             { 
-                test: /\.less$/, 
-                loader: "style!css!less" 
-            }
+                test: /\.scss$/, 
+                loader: ExtractTextPlugin.extract(
+                    /* activate source maps via loader query */
+                    'css?sourceMap!' +
+                    'sass?sourceMap'
+                )
+            },
+			{
+				test: /\.html$/,
+				loader: 'raw'
+			}
         ]
     },
     node: {
         fs: 'empty'
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({minimize: true})
+        new ExtractTextPlugin("/css/styles.css", {allChunks: true}) 
     ]
 };

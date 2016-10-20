@@ -1,3 +1,5 @@
+    <!-- This is the main template to show the progressbar content -->
+    <!-- Loop over the 'progressbars' property of ractive instance and show -->
     {{#each progressbars}}
         <div class="row-pb">
             <div class="display-label">{{showvalue < 0 ? 0 : showvalue}}%</div>
@@ -5,16 +7,18 @@
         </div>
     {{/each}}
 
-    <select value='{{selectedProgressBar}}' class="row-select">
-        <option selected value='select'>Select Progress Bar</option>
+    <!-- Progress-bar drop-down -->
+    <select value="{{selectedProgressBar}}" class="row-select">
+        <option selected value="select">Select Progress Bar</option>
         {{#each progressbars :index}}
-            <option value='{{index}}'>{{name}}</option>
+            <option value="{{index}}">{{name}}</option>
         {{/each}}
     </select>
 
+    <!-- Width change buttons -->
     {{#each intervals}}
-        <button disabled='{{selectedProgressBar == "select"}}' 
-                on-click='@this.changeInterval(this)' class="btns">
-            {{this > 0 ? '+' : ''}}{{this}}
+        <button disabled="{{selectedProgressBar == 'select'}}" 
+                on-click="@this.changeInterval(this)" class="btns">
+            {{this > 0 ? "+" : ""}}{{this}}
         </button>
     {{/each}}

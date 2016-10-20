@@ -1,27 +1,37 @@
-import Ractive from 'ractive';  
-import Template from '../../views/progressbar.html';
+/* Name- progressbarHandler.js
+  Description- The Ractive Component - ProgressbarHandler
+  Version- 1.0
+*/
 
+import Ractive from 'ractive';  
+import Template from '../../views/progressbar.html'; /* Imports template to be used in ractive component */
+
+/* Creates a ractive component encapsulating properties and methods */
 var ProgressbarHandler = Ractive.extend({  
     isolated: true,
     template: Template,
 
+    /* Event handler method to be called upon width change button clicks */
     changeInterval: function (val) {
+        
+        /* Holds the selected progress bar value from drop down */
         var selectedBar = this.get('selectedProgressBar');
         if(selectedBar == null) return;
         
-        var keypath = 'progressbars[' + selectedBar + '].value';
-        var keypath1 = 'progressbars[' + selectedBar + '].showvalue';
+        var keyPath = 'progressbars[' + selectedBar + '].value';
+        var keyPath1 = 'progressbars[' + selectedBar + '].showvalue';
         
-        if(this.get(keypath1) < 0) 
+        if(this.get(keyPath1) < 0) 
         {
-            this.set(keypath, 0);
-            this.set(keypath1, 0);
+            this.set(keyPath, 0);
+            this.set(keyPath1, 0);
         }
-        var f = this.get(keypath1) + val;
-        this.set(keypath1, f);
-        this.animate(keypath, f);        
+        var nextVal = this.get(keyPath1) + val;
+        this.set(keyPath1, nextVal);
+        this.animate(keyPath, nextVal);        
     },
-
+    
+    /* Initializes data */
     data: function () {
         return {
             selectedProgressBar: 'select',
