@@ -10,7 +10,7 @@ module.exports = {
     devtool: 'source-map',
     output: {
         path: './dist',
-        filename: '/js/app-bundle.js'
+        filename: '/js/app-bundle.min.js'
     },
     module: {
         loaders: [
@@ -40,6 +40,7 @@ module.exports = {
         fs: 'empty'
     },
     plugins: [
-        new ExtractTextPlugin("/css/styles.css", {allChunks: true}) 
+        new ExtractTextPlugin("/css/styles.min.css", {allChunks: true}),
+        new webpack.optimize.UglifyJsPlugin({minimize: true})
     ]
 };
